@@ -10,4 +10,4 @@ mix
     .js('src/scripts/app.js', 'public/scripts').setPublicPath('public')
 
     // CSS
-    .css('src/style/style.css', 'style')
+    .sass('src/style/style.scss', 'public/style/style.css')
