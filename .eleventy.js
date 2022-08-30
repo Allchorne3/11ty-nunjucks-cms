@@ -1,14 +1,18 @@
-const { DateTime } = require("luxon")
+const { DateTime } = require("luxon") // For date formatting
+const emojiReadTime = require("@11tyrocks/eleventy-plugin-emoji-readtime") //For blog post read time
 
 module.exports = function(eleventyConfig) {
 
     // Recomplile 11ty when files change
     eleventyConfig.addWatchTarget("./src/style/")
 
-    //from 11tyrocks: https://11ty.rocks/eleventyjs/dates/
+    // From 11tyrocks: https://11ty.rocks/eleventyjs/dates/
     eleventyConfig.addFilter("postDate", (dateObj) => {
         return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED)
     })
+
+    // From https://www.npmjs.com/package/@11tyrocks/eleventy-plugin-emoji-readtime
+    eleventyConfig.addPlugin(emojiReadTime, { showEmoji: false })
 
     // Automatically open up the browser on script runs
     eleventyConfig.setBrowserSyncConfig({
