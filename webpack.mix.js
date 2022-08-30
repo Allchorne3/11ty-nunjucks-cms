@@ -5,6 +5,7 @@ mix
     // Directories
     .copyDirectory('./src/admin', 'public/admin')
     .copyDirectory('./src/assets', 'public/assets')
+    .copyDirectory('./src/_redirects', 'public/')
 
     // JavaScript
     .js('src/scripts/app.js', 'public/scripts').setPublicPath('public')

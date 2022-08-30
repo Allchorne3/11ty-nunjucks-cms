@@ -2,8 +2,6 @@ const { DateTime } = require("luxon")
 
 module.exports = function(eleventyConfig) {
 
-    eleventyConfig.addPassthroughCopy('src/_redirects')
-
     // Recomplile 11ty when files change
     eleventyConfig.addWatchTarget("./src/style/")
 
