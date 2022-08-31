@@ -12,7 +12,13 @@ module.exports = function(eleventyConfig) {
     })
 
     // From https://www.npmjs.com/package/@11tyrocks/eleventy-plugin-emoji-readtime
-    eleventyConfig.addPlugin(emojiReadTime, { showEmoji: false })
+    eleventyConfig.addPlugin(emojiReadTime, { 
+        showEmoji: false, 
+        wpm: 250,
+        //emoji: "📕",
+        //label: "mins",
+        //bucketSize: 3,
+    })
 
     // Automatically open up the browser on script runs
     eleventyConfig.setBrowserSyncConfig({
