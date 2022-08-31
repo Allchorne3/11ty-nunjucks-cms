@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon") // For date formatting
 const emojiReadTime = require("@11tyrocks/eleventy-plugin-emoji-readtime") //For blog post read time
+const htmlmin = require("html-minifier");
 
 module.exports = function(eleventyConfig) {
 
@@ -25,7 +26,19 @@ module.exports = function(eleventyConfig) {
         open: true
     })
 
+    eleventyConfig.addTransform ('htmlmin', content => {
+        if (process.env.NODE_ENV === 'production') {
+          return htmlmin.minify (content, {
+            useShortDoctype: true,
+            removeComments: true,
+            collapseWhitespace: true,
+          })
+        }
+        return content
+    })    
+
     return {
+        htmlTemplateEngine: 'njk',
         dir: {
             input: "src",
             output: "public"
