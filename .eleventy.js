@@ -16,10 +16,28 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(emojiReadTime, { 
         showEmoji: false, 
         wpm: 250,
-        //emoji: "📕",
-        //label: "mins",
-        //bucketSize: 3,
+        // emoji: "🕚",
+        label: "min read",
+        bucketSize: 1,
     })
+
+    // For adding categories
+    // From: https://lewisdale.dev/post/adding-categories-to-eleventy/
+    eleventyConfig.addCollection('categories', (collectionApi) => {
+        const posts = collectionApi
+            .getFilteredByTag("posts")
+            .filter(p => !p.data.tags.includes("draft"));
+
+        return posts.reduce((tags, post) => {
+            post.data.tags.filter(tag => tag !== 'posts').forEach(tag => {
+                if (!tags[tag]) {
+                    tags[tag] = 0;
+                }
+                tags[tag]++;
+            });
+            return tags;
+        }, {"All posts": posts.length})
+    });
 
     // Automatically open up the browser on script runs
     eleventyConfig.setBrowserSyncConfig({
